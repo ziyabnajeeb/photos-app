@@ -4,9 +4,9 @@ import Photo from './Photo';
 
 const Photos = ({ photos }) => (
   <>
-    <H2 className="fw-bolder text-center">Our Photos</H2>
+    <H2 className="fw-bolder text-center text-light">Our Photos</H2>
     <Row className="row justify-content-center align-items-center">
-      {photos && photos.map((photo) => <Photo key={photo.id} {...photo} />)}
+      {photos && photos.map((photo, i) => <Photo key={i} {...photo} />)}
     </Row>
   </>
 );

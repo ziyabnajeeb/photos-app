@@ -2,6 +2,7 @@
 $theme-body-color: #f8f8f8;
 $gray-150: $theme-body-color;
 $test-gray: #343a40;
+$rusted: #1f0c05;
 
 // Whites
 $white: #fff;
@@ -41,11 +42,12 @@ $theme-colors: (
   'warning': $warning,
   'danger': $danger,
   'light': $light,
-  'dark': $dark
+  'dark': $dark,
 );
 
 // Custom Colors
 $custom-colors: (
   'gray-150': $gray-150,
-  'test-gray': $test-gray
+  'test-gray': $test-gray,
+  'rusted': $rusted,
 );
