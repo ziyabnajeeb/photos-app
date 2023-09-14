@@ -4,7 +4,6 @@ export const fetchPhotos = async (page) => {
     const url = `https://jsonplaceholder.typicode.com/photos?_start=${(page - 1) * 5}&_limit=5`;
     const response = await fetch(url);
     const photosData = await response.json();
-    console.log('🚀 ~ file: api.js:7 ~ fetchPhotos ~ photosData:', photosData);
     return photosData;
   } catch (error) {
     console.error('Error fetching photos:', error);

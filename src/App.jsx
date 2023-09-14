@@ -50,18 +50,18 @@ const App = () => {
       <Row className="justify-content-center align-items-center flex-column">
         <Col lg={8}>
           <Section className="text-test-gray mt-4">
+            {errorMsg && <p className="error-msg">{errorMsg}</p>}
             {loading && photos === null ? <Loading /> : <Photos photos={photos} />}
 
             <Row className="row justify-content-center align-items-center mt-5">
               <Col sm={8} className="text-center">
-                {errorMsg && <p className="error-msg">{errorMsg}</p>}
                 {!loading && hasMore && (
                   <Button
                     onClick={handleLoadMore}
                     size="lg"
                     variant="rusted"
-                    className="text-uppercase fw-bolder rounded-circle p-3">
-                    {loading ? <Loading /> : <ArrowDown className="fs-1" />}
+                    className="text-uppercase fw-bolder rounded-circle p-3 d-flex mx-auto">
+                    {loading ? <Loading /> : <ArrowDown className="fs-1 text-warning" />}
                   </Button>
                 )}
               </Col>
