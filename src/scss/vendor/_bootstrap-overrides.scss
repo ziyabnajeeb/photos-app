@@ -1,0 +1,53 @@
+@use 'sass:map';
+@use '../abstracts' as abst;
+
+@use '../../../node_modules/bootstrap/scss/bootstrap' as bss
+  with(
+    // Bootstrap Variables Override
+    // // Bsse
+    $body-bg: abst.$theme-body-color,
+    $font-family-base: abst.$theme-font-family,
+    // $body-color: abst.$lendo-gray,
+    $font-weight-light: 200,
+    $font-weight-medium: 500,
+    $font-weight-bold: 700,
+    $font-weight-bolder: 800,
+    // // Tabs
+    // $nav-tabs-border-radius: 0,
+    // $nav-link-padding-y: abst.rem(20px),
+    // $nav-link-padding-x: abst.rem(30px),
+    // $nav-link-font-size: abst.rem(22px),
+    // $nav-link-color: abst.$white,
+    // $nav-link-hover-color: abst.$lendo-light-gray-300,
+    // $nav-tabs-border-width: 0,
+    // // Button
+    // $btn-padding-y: abst.rem(15px),
+    // $btn-padding-x: abst.rem(35px),
+    // $btn-padding-y-lg: abst.rem(15px),
+    // $btn-padding-x-lg: abst.rem(35px),
+    // $btn-font-weight: 700,
+    // // Accordion
+    // $accordion-border-width: 0,
+    // $accordion-button-active-bg: transparent,
+    // $accordion-button-active-color: abst.$lendo-gray,
+    // $accordion-padding-y: abst.rem(30px),
+    // $accordion-padding-x: abst.rem(30px),
+    // $accordion-button-padding-x: 0,
+    // $accordion-button-focus-border-color: none,
+    // $accordion-button-focus-box-shadow: none,
+    // $accordion-icon-width: 1.5rem,
+    // $accordion-button-icon: abst.$bs-icon-plus,
+    // $accordion-button-active-icon: abst.$bs-icon-minus,
+    $theme-colors: map-merge(abst.$theme-colors, abst.$custom-colors)
+  );
+
+//   Bootstrap Mixins
+// @include bss.color-mode(dark) {
+//   --bs-lendo-light-blue: var(--bs-lendo-blue);
+//   --bs-lendo-dark-blue: var(--bs-gray-300);
+//   --bs-lendo-dark-blue-rgb: var(--bs-gray-300);
+//   --bs-lendo-light-gray: var(--bs-gray-800);
+//   --bs-lendo-light-gray-rgb: var(--bs-gray-800);
+//   --bs-white: var(--bs-gray-800);
+//   --bs-white-rgb: var(--bs-gray-800);
+// }

@@ -1,0 +1,7 @@
+// .eslintignore
+public/**
+dist/**
+build/**
+node_modules/**
+coverage/**
+src/registerServiceWorker.js
