@@ -1,14 +1,30 @@
 import { useState } from 'react';
-import { Button, Card, Col, Stack } from 'react-bootstrap';
+import { Button, Card, Col, Placeholder, Stack } from 'react-bootstrap';
 
 const Photo = ({ id, download_url, title, author, body, removePhoto }) => {
   const [readMore, setReadMore] = useState(false);
   return (
     <Col sm={12} className="mt-5" data-bs-theme="dark">
       <Card className="shadow rounded-4 pb-4">
-        <Card.Img variant="top" className="rounded-top-4" src={download_url} alt={title} />
+        <Placeholder
+          as="div"
+          animation="glow"
+          className="card-img-wrapper"
+          style={{ height: '250px', overflow: 'hidden' }}>
+          <Placeholder
+            as={Card.Img}
+            animation="glow"
+            variant="top"
+            className="rounded-top-4"
+            src={download_url}
+            alt={title}
+            fluid
+          />
+        </Placeholder>
         <Card.Body>
-          <Card.Title className="fw-bolder text-warning text-capitalize">{author}</Card.Title>
+          <Placeholder as={Card.Title} animation="glow" className="fw-bolder text-warning text-capitalize">
+            {author}
+          </Placeholder>
           <Card.Text className="fs-6 mt-2 mb-4 text-capitalize">
             {readMore ? body : `${body.substring(0, 120)}...`}
             <Button
