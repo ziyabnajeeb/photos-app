@@ -1,38 +1,27 @@
-// api.js
-export const fetchPhotos = async (page) => {
+import axios from 'axios';
+
+const getData = async (url) => {
   try {
-    const url = `https://jsonplaceholder.typicode.com/photos?_start=${(page - 1) * 5}&_limit=5`;
-    const response = await fetch(url);
-    const photosData = await response.json();
-    return photosData;
+    const { data } = await axios.get(url);
+    // console.log('🚀 ~ file: api.js:6 ~ getData ~ data:', data);
+    return data;
   } catch (error) {
-    console.error('Error fetching photos:', error);
+    console.log('An error occurred. Awkward..');
     return [];
   }
+};
+
+export const fetchPhotos = async (page) => {
+  const response = await getData(`https://jsonplaceholder.typicode.com/photos?_start=${(page - 1) * 5}&_limit=5`);
+  return response;
 };
 
 export const fetchComments = async (page) => {
-  try {
-    const url = `https://jsonplaceholder.typicode.com/comments?_start=${(page - 1) * 5}&_limit=5`;
-    const response = await fetch(url);
-    const res = await response.json();
-    const commentsData = res.map(({ body }) => ({ body }));
-    return commentsData;
-  } catch (error) {
-    console.error('Error fetching comments:', error);
-    return [];
-  }
+  const response = await getData(`https://jsonplaceholder.typicode.com/comments?_start=${(page - 1) * 5}&_limit=5`);
+  return response;
 };
 
 export const fetchImages = async (page) => {
-  try {
-    const url = `https://picsum.photos/v2/list?page=${page}&limit=5`;
-    const response = await fetch(url);
-    const res = await response.json();
-    const imagesData = res.map(({ download_url }) => ({ download_url }));
-    return imagesData;
-  } catch (error) {
-    console.error('Error fetching images:', error);
-    return [];
-  }
+  const response = await getData(`https://picsum.photos/v2/list?page=${page}&limit=5`);
+  return response;
 };

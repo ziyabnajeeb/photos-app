@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Col, Container, Row, Stack } from 'react-bootstrap';
-import { Section } from './components/ui/Tag/Tag';
-import Loading from './components/Loading/Loading';
-import Photos from './components/Photos/Photos/Photos';
+import { Col, Container, Row } from 'react-bootstrap';
 import { fetchComments, fetchImages, fetchPhotos } from './api/api';
-import ArrowDown from './assets/images/arrow-down.svg';
+import { Section } from './components/ui/Tag/Tag';
+import { Error, LoadMore, Loading, Photos, Refresh } from './components';
 
 import './App.css';
 
@@ -15,9 +13,13 @@ const App = () => {
   const [page, setPage] = useState(1);
   const [errorMsg, setErrorMsg] = useState('');
 
-  const setPhotosData = async () => {
-    setLoading(true);
+  const removePhoto = (id) => {
+    const newPhoto = photos.filter((photo) => photo.id !== id);
+    setPhotos(newPhoto);
+  };
 
+  const setPhotosData = async (page) => {
+    setLoading(true);
     try {
       const [pics, chats, fetchedImages] = await Promise.all([
         fetchPhotos(page),
@@ -36,7 +38,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    setPhotosData();
+    setPhotosData(page);
   }, [page]);
 
   const handleLoadMore = () => {
@@ -48,24 +50,12 @@ const App = () => {
   return (
     <Container as="main" className="py-5">
       <Row className="justify-content-center align-items-center flex-column">
-        <Col lg={8}>
+        <Col lg={4}>
           <Section className="text-test-gray mt-4">
-            {errorMsg && <p className="error-msg">{errorMsg}</p>}
-            {loading && photos === null ? <Loading /> : <Photos photos={photos} />}
-
-            <Row className="row justify-content-center align-items-center mt-5">
-              <Col sm={8} className="text-center">
-                {!loading && hasMore && (
-                  <Button
-                    onClick={handleLoadMore}
-                    size="lg"
-                    variant="rusted"
-                    className="text-uppercase fw-bolder rounded-circle p-3 d-flex mx-auto">
-                    {loading ? <Loading /> : <ArrowDown className="fs-1 text-warning" />}
-                  </Button>
-                )}
-              </Col>
-            </Row>
+            {errorMsg && <Error errorMsg={errorMsg} />}
+            {loading && !photos ? <Loading /> : <Photos photos={photos} removePhoto={removePhoto} />}
+            {photos.length === 0 && <Refresh loading={loading} setPhotosData={setPhotosData} />}
+            {photos?.length > 1 && hasMore && <LoadMore loading={loading} handleLoadMore={handleLoadMore} />}
           </Section>
         </Col>
       </Row>
